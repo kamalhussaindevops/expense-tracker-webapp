@@ -39,6 +39,11 @@
                                 You have been logged out
                             </div>
                         </div>
+                        <div th:if="${param.registrationSuccess}">
+                            <div class="alert alert-success" role="alert">
+                                You have been Signed Up successfully, you can sign in now.
+                            </div>
+                        </div>
                         <form action="#" th:action="@{/authenticateTheUser}" method="post">
                             <div class="row gy-3 overflow-hidden">
                                 <div class="col-12">
