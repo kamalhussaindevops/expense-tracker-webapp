@@ -16,7 +16,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "client_id")
     private Client client;
 
@@ -63,6 +66,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Client getClient() {
