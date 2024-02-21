@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav" th:fragment="navbar(show)">
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav" th:fragment="navbar(showAbout, showList, showAdd, showProfile)">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}">Expenses Tracker</a>
         <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,9 +11,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
-                <li th:if="${show == 'yes'}" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
-                <li class="nav-item mx-0 mx-lg-1" style="cursor: pointer;"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/showLoginPage}">Sigh in</a></li>
-                <li class="nav-item mx-0 mx-lg-1" style="cursor: pointer;"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/showRegistrationForm}">Sign up</a></li>
+                <li th:if="${showAbout == 'yes'}" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
+                <li th:if="${showList == 'yes'}" class="nav-item mx-0 mx-lg-1" style="cursor: pointer;"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/showLoginPage}">Sigh in</a></li>
+                <li th:if="${showList == 'yes'}" class="nav-item mx-0 mx-lg-1" style="cursor: pointer;"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/showRegistrationForm}">Sign up</a></li>
+                <li th:if="${showList == 'yes'}" class="nav-item mx-0 mx-lg-1" style="cursor: pointer;"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/list}">Show Expenses</a></li>
+                <li th:if="${showAdd == 'yes'}" class="nav-item mx-0 mx-lg-1" style="cursor: pointer;"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/showAdd}">Add Expense</a></li>
             </ul>
         </div>
     </div>
