@@ -7,6 +7,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 public class SecurityConfig {
@@ -25,7 +26,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http
+            , AuthenticationSuccessHandler customAuthenticationSuccessHandler) throws Exception{
         http.authorizeHttpRequests(config ->
                 config
                         .requestMatchers("/css/**").permitAll()
@@ -39,6 +41,7 @@ public class SecurityConfig {
                         form
                                 .loginPage("/showLoginPage")
                                 .loginProcessingUrl("/authenticateTheUser")
+                                .successHandler(customAuthenticationSuccessHandler)
                                 .permitAll());
         return http.build();
     }

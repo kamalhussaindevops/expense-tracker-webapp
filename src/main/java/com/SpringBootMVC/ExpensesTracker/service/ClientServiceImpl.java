@@ -18,4 +18,9 @@ public class ClientServiceImpl implements ClientService {
     public void saveClient(Client client) {
         clientRepository.save(client);
     }
+
+    @Override
+    public Client findClientById(int id) {
+        return clientRepository.findById(id).orElse(null);
+    }
 }
