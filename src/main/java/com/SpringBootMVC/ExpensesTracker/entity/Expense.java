@@ -14,6 +14,13 @@ public class Expense {
     @Column(name = "description", length = 400)
     private String description;
 
+    @Transient
+    private String categoryName;
+    @Transient
+    private String date;
+    @Transient
+    private String time;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     Client client;
@@ -63,6 +70,30 @@ public class Expense {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public Client getClient() {
