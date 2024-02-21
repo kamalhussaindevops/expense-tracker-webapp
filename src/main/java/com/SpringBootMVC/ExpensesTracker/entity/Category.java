@@ -5,16 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Cateogry {
+public class Category {
     @Id
     private int id;
     @Column(name = "name")
     private String name;
 
-    public Cateogry() {
+    public Category() {
     }
 
-    public Cateogry(int id, String name) {
+    public Category(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -33,5 +33,13 @@ public class Cateogry {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
