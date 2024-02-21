@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
     ExpenseRepository expenseRepository;
@@ -39,5 +41,15 @@ public class ExpenseServiceImpl implements ExpenseService {
         Category category = categoryService.findCategoryByName(expenseDTO.getCategory());
         expense.setCategory(category);
         expenseRepository.save(expense);
+    }
+
+    @Override
+    public List<Expense> findAllExpenses() {
+        return expenseRepository.findAll();
+    }
+
+    @Override
+    public List<Expense> findAllExpensesByClientId(int id) {
+        return expenseRepository.findByClientId(id);
     }
 }
