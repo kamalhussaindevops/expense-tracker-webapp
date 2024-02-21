@@ -42,7 +42,12 @@ public class SecurityConfig {
                                 .loginPage("/showLoginPage")
                                 .loginProcessingUrl("/authenticateTheUser")
                                 .successHandler(customAuthenticationSuccessHandler)
-                                .permitAll());
+                                .permitAll())
+                .logout(logout ->
+                        logout
+                                .permitAll()
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/showLoginPage"));
         return http.build();
     }
 

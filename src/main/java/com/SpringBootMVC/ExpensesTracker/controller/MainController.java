@@ -32,7 +32,9 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String landingPage(){
+    public String landingPage(HttpSession session, Model model){
+        Client client = (Client) session.getAttribute("client");
+        model.addAttribute("sessionClient", client);
         return "landing-page";
     }
 
