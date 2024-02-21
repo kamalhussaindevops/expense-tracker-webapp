@@ -14,23 +14,23 @@ public class Expense {
     @Column(name = "description", length = 400)
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     Client client;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cateogry_id")
-    Cateogry cateogry;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    Category category;
 
     public Expense() {
     }
 
-    public Expense(int amount, String dateTime, String description, Client client, Cateogry cateogry) {
+    public Expense(int amount, String dateTime, String description, Client client, Category category) {
         this.amount = amount;
         this.dateTime = dateTime;
         this.description = description;
         this.client = client;
-        this.cateogry = cateogry;
+        this.category = category;
     }
 
     public int getId() {
@@ -73,11 +73,11 @@ public class Expense {
         this.client = client;
     }
 
-    public Cateogry getCateogry() {
-        return cateogry;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCateogry(Cateogry cateogry) {
-        this.cateogry = cateogry;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
