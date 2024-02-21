@@ -21,11 +21,11 @@ public class Expense {
     @Transient
     private String time;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_id")
     Client client;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     Category category;
 
@@ -110,5 +110,20 @@ public class Expense {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", dateTime='" + dateTime + '\'' +
+                ", description='" + description + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", client=" + client +
+                ", category=" + category +
+                '}';
     }
 }

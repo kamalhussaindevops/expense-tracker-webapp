@@ -44,6 +44,17 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    public void update(ExpenseDTO expenseDTO) {
+        Expense existingExpense = expenseRepository.findById(expenseDTO.getExpenseId()).orElse(null);
+        existingExpense.setAmount(expenseDTO.getAmount());
+        existingExpense.setDateTime(expenseDTO.getDateTime());
+        existingExpense.setDescription(expenseDTO.getDescription());
+        Category category = categoryService.findCategoryByName(expenseDTO.getCategory());
+        existingExpense.setCategory(category);
+        expenseRepository.save(existingExpense);
+    }
+
+    @Override
     public List<Expense> findAllExpenses() {
         return expenseRepository.findAll();
     }
@@ -51,5 +62,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public List<Expense> findAllExpensesByClientId(int id) {
         return expenseRepository.findByClientId(id);
+    }
+
+    @Override
+    public void deleteExpenseById(int id) {
+        expenseRepository.deleteById(id);
     }
 }

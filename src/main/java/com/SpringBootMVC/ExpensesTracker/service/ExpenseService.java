@@ -8,6 +8,9 @@ import java.util.List;
 public interface ExpenseService {
     Expense findExpenseById(int id);
     void save(ExpenseDTO expenseDTO);
+    void update(ExpenseDTO expenseDTO);
     List<Expense> findAllExpenses();
     List<Expense> findAllExpensesByClientId(int id);
+    void deleteExpenseById(int id);
+
 }

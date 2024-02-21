@@ -1,6 +1,7 @@
 package com.SpringBootMVC.ExpensesTracker.DTO;
 
 public class ExpenseDTO {
+    private int expenseId;
     private int clientId;
     private String category;
     private int amount;
@@ -8,6 +9,14 @@ public class ExpenseDTO {
     private String description;
 
     public ExpenseDTO() {
+    }
+
+    public int getExpenseId() {
+        return expenseId;
+    }
+
+    public void setExpenseId(int expenseId) {
+        this.expenseId = expenseId;
     }
 
     public int getClientId() {
