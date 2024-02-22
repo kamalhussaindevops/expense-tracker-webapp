@@ -82,19 +82,15 @@ public class ExpenseServiceImpl implements ExpenseService {
             String category = filter.getCategory();
             int categoryId = categoryService.findCategoryByName(category).getId();
             query += String.format(" e.category.id = %d AND", categoryId);
-            System.out.println("category query okay-------------------");
         }
         int from = filter.getFrom();
         int to = filter.getTo();
         query += String.format(" e.amount between %d and %d", from, to);
-        System.out.println("amount query okay-------------------");
         if (!"all".equals(filter.getYear())) {
             query += String.format(" AND CAST(SUBSTRING(e.dateTime, 1, 4) AS INTEGER) = %s", filter.getYear());
-            System.out.println("year query okay-------------------");
         }
         if (!"all".equals(filter.getMonth())) {
             query += String.format(" AND CAST(SUBSTRING(e.dateTime, 6, 2) AS INTEGER) = %s", filter.getMonth());
-            System.out.println("month query okay-------------------");
         }
         TypedQuery<Expense> expenseTypedQuery = entityManager.createQuery(query, Expense.class);
         List<Expense> expenseList = expenseTypedQuery.getResultList();
