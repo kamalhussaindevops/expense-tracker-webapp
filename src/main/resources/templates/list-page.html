@@ -25,6 +25,10 @@
             font-size: 20px;
             font-weight: bold;
         }
+        .MY {
+            margin-top: 34px;
+            padding-left: 19px;
+        }
     </style>
 </head>
 <body id="page-top">
@@ -42,6 +46,82 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
+
+        <!-- Filter form-->
+        <div class="d-flex flex-column justify-content-start text-left gap-10">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <form th:action="@{/processFilter}" th:object="${filter}" method="post">
+                        <div class="form-group">
+                            <!-- Dropdown List for Expense Categories -->
+                            <label for="expenseCategory"><h6>Expense Category :</h6></label>
+                            <select id="expenseCategory" name="expenseCategory" style="width: 32%; margin-left: 20px;" th:field="*{category}">
+                                <option value="all">ALL</option>
+                                <option value="groceries">Groceries</option>
+                                <option value="Utilities(bills)">Utilities (bills)</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="dining out">Dining Out</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="travel">Travel</option>
+                                <option value="education">Education</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <div class="col-md-2 MY"><h6>Amount Range:</h6></div>
+                            <div class="col-md-2">
+                                <label for="from" style="margin-left: 8px;"><h6>From</h6></label>
+                                <input type="number" class="form-control" id="from" th:field="*{from}">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="to" style="margin-left: 8px;"><h6>To</h6></label>
+                                <input type="number" class="form-control" id="to" th:field="*{to}">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <div class="col-md-2 MY"><h6>Month :</h6></div>
+                            <div class="col-md-2">
+                                <label for="months"></label>
+                                <select id="months" name="months" class="form-control" style="width: 100%;" th:field="*{month}">
+                                    <option value="all">ALL</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2 MY"><h6>Year :</h6></div>
+                            <div class="col-md-2">
+                                <label for="years"></label>
+                                <select id="years" name="years" class="form-control" style="width: 100%;margin-left:-27px;" th:field="*{year}">
+                                    <option value="all">ALL</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Apply" style="width: 30%;"/>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- About Section Content-->
 <!--        <div class="d-flex flex-row">-->
             <div class="row">

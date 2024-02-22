@@ -1,6 +1,7 @@
 package com.SpringBootMVC.ExpensesTracker.controller;
 
 import com.SpringBootMVC.ExpensesTracker.DTO.ExpenseDTO;
+import com.SpringBootMVC.ExpensesTracker.DTO.FilterDTO;
 import com.SpringBootMVC.ExpensesTracker.entity.Client;
 import com.SpringBootMVC.ExpensesTracker.entity.Expense;
 import com.SpringBootMVC.ExpensesTracker.service.CategoryService;
@@ -63,6 +64,7 @@ public class MainController {
             expense.setTime(LocalDateTime.parse(expense.getDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME).toLocalTime().toString());
         }
         model.addAttribute("expenseList", expenseList);
+        model.addAttribute("filter", new FilterDTO());
         return "list-page";
     }
 
@@ -93,6 +95,24 @@ public class MainController {
     public String delete(@RequestParam("expId") int id){
         expenseService.deleteExpenseById(id);
         return "redirect:/list";
+    }
+
+
+    @PostMapping("/processFilter")
+    public String processFilter(@ModelAttribute("filter") FilterDTO filter, Model model){
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("filter values : " + filter);
+        List<Expense> expenseList = expenseService.findFilterResult(filter);
+        System.out.println("size ----> " + expenseList.size());
+        System.out.println(expenseList);
+
+        for (Expense expense : expenseList){
+            expense.setCategoryName(categoryService.findCategoryById(expense.getCategory().getId()).getName());
+            expense.setDate(LocalDateTime.parse(expense.getDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME).toLocalDate().toString());
+            expense.setTime(LocalDateTime.parse(expense.getDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME).toLocalTime().toString());
+        }
+        model.addAttribute("expenseList", expenseList);
+        return "filter-result";
     }
 
 
