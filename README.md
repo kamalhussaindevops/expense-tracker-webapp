@@ -42,16 +42,16 @@ Build the project using your preferred IDE or with Maven:
 Open your web browser and navigate to `http://localhost:8080`.
 
 ## ScreenShots
-![Example Image](screenshots/1.jpg)
-![Example Image](screenshots/2.jpg)
-![Example Image](screenshots/3.jpg)
-![Example Image](screenshots/4.jpg)
-![Example Image](screenshots/5.jpg)
-![Example Image](screenshots/6.jpg)
-![Example Image](screenshots/7.jpg)
-![Example Image](screenshots/8.jpg)
-![Example Image](screenshots/9.jpg)
-![Example Image](screenshots/10.jpg)
+![Example Image](screenshots/1.png)
+![Example Image](screenshots/2.png)
+![Example Image](screenshots/3.png)
+![Example Image](screenshots/4.png)
+![Example Image](screenshots/5.png)
+![Example Image](screenshots/6.png)
+![Example Image](screenshots/7.png)
+![Example Image](screenshots/8.png)
+![Example Image](screenshots/9.png)
+![Example Image](screenshots/10.png)
 
 ## Contributions
 Contributions are welcome! If you find a bug or have suggestions for improvement, feel free to open an issue or create a pull request.
