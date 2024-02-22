@@ -50,8 +50,6 @@ Open your web browser and navigate to `http://localhost:8080`.
 ![Example Image](screenshots/6.png)
 ![Example Image](screenshots/7.png)
 ![Example Image](screenshots/8.png)
-![Example Image](screenshots/9.png)
-![Example Image](screenshots/10.png)
 
 ## Contributions
 Contributions are welcome! If you find a bug or have suggestions for improvement, feel free to open an issue or create a pull request.
