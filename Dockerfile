@@ -14,9 +14,11 @@ COPY . /app
 
 # Build application and skip test cases
 
+#EXPOSE 8080
+
 RUN mvn clean install -DskipTests=true
 
-ENTRYPOINT ["java", "-jar", "/expenseapp.jar"]
+#ENTRYPOINT ["java", "-jar", "/expenseapp.jar"]
 
 #--------------------------------------
 # Stage 2 - app build
@@ -30,7 +32,7 @@ WORKDIR /app
 
 # Copy build from stage 1 (builder)
 
-COPY --from=builder /app/target/*.jar /app/target/bankapp.jar
+COPY --from=builder /app/target/*.jar /app/target/expenseapp.jar
 
 # Expose application port 
 
