@@ -11,12 +11,12 @@ services:
     networks:
       - appbridge
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD","mysqladmin","ping","-h","localhost","-uroot","-pTest@123"]
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 30s
-        #  restart: always
+    restart: always
 
   mainapp:
     image: snehcreate/expensetrackerapp-v2
