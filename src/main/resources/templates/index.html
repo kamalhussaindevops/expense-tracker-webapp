@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Pulse | Smart Expense Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/app.css}" href="/css/app.css">
+</head>
+<body>
+<div class="noise-layer"></div>
+<div class="background-glow background-glow-a"></div>
+<div class="background-glow background-glow-b"></div>
+
+<div class="page-shell">
+    <nav class="site-nav panel reveal">
+        <a class="nav-brand" th:href="@{/}">
+            <span class="brand-mark">EP</span>
+            <span>Expense Pulse</span>
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/}">Home</a>
+            <a href="#expenseForm">Add Expense</a>
+            <a href="#historySection">History</a>
+        </div>
+        <a class="btn btn-soft" th:href="@{/dashboard}">Dashboard</a>
+    </nav>
+
+    <header class="topbar panel reveal">
+        <div class="brand-block">
+            <div class="brand-mark">EP</div>
+            <div>
+                <h1>Expense Pulse</h1>
+                <p>Real-time clarity for your money</p>
+            </div>
+        </div>
+        <div class="topbar-actions">
+            <button id="seedDemoBtn" class="btn btn-soft">Load Demo Data</button>
+            <button id="resetAllBtn" class="btn btn-danger">Reset</button>
+        </div>
+    </header>
+
+    <main class="layout-grid">
+        <section class="hero panel reveal reveal-delay-1">
+            <div>
+                <p class="eyebrow">Financial command center</p>
+                <h2>Track daily spending, control monthly goals, and spot category leaks instantly.</h2>
+                <p class="hero-sub">Built for real usage: fast entry, trend visibility, and actionable insights with no clutter.</p>
+                <div class="hero-kpis">
+                    <article class="kpi">
+                        <span>Total Spend</span>
+                        <strong id="totalSpend">$0.00</strong>
+                    </article>
+                    <article class="kpi">
+                        <span>This Month</span>
+                        <strong id="monthSpend">$0.00</strong>
+                    </article>
+                    <article class="kpi">
+                        <span>Remaining Budget</span>
+                        <strong id="remainingBudget">$0.00</strong>
+                    </article>
+                </div>
+            </div>
+            <div class="budget-card panel-inset">
+                <div class="budget-head">
+                    <h3>Monthly Budget</h3>
+                    <button id="editBudgetBtn" class="btn btn-ghost">Set Budget</button>
+                </div>
+                <p id="activeMonthLabel">Month: --</p>
+                <p id="budgetLabel">$0.00 budget set</p>
+                <div class="meter-wrap" aria-hidden="true">
+                    <div id="budgetProgressBar" class="meter-fill"></div>
+                </div>
+                <p id="budgetStatus" class="status-text">Add expenses to track your burn rate.</p>
+                <p id="budgetLockNote" class="lock-note"></p>
+            </div>
+        </section>
+
+        <section class="entry panel reveal reveal-delay-2">
+            <h3>Add Expense</h3>
+            <form id="expenseForm" class="entry-form" novalidate>
+                <div class="field">
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" maxlength="60" placeholder="Groceries, Uber, Rent" required>
+                </div>
+                <div class="field-grid">
+                    <div class="field">
+                        <label for="amount">Amount</label>
+                        <input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="45.50" required>
+                    </div>
+                    <div class="field">
+                        <label for="date">Date</label>
+                        <input id="date" name="date" type="date" required>
+                    </div>
+                </div>
+                <div class="field-grid">
+                    <div class="field">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="">Choose category</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Health">Health</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Savings">Savings</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="paymentMethod">Payment</label>
+                        <select id="paymentMethod" name="paymentMethod" required>
+                            <option value="">Choose method</option>
+                            <option value="Card">Card</option>
+                            <option value="Cash">Cash</option>
+                            <option value="UPI/Wallet">UPI/Wallet</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" name="notes" rows="2" maxlength="140" placeholder="Optional details"></textarea>
+                </div>
+                <div class="field field-check">
+                    <input id="recurring" name="recurring" type="checkbox">
+                    <label for="recurring">Mark as recurring expense</label>
+                </div>
+                <div class="quick-categories" id="quickCategories"></div>
+                <div id="anomalyAlert" class="anomaly-alert" hidden></div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="saveBtn">Save Expense</button>
+                    <button type="button" class="btn btn-soft" id="cancelEditBtn" hidden>Cancel Edit</button>
+                </div>
+                <p class="form-hint">Tip: press Enter from any field to quickly save.</p>
+                <p id="formError" class="form-error" role="alert" aria-live="assertive"></p>
+            </form>
+        </section>
+
+        <section class="insights panel reveal reveal-delay-3">
+            <div class="panel-head">
+                <h3>Category Breakdown</h3>
+            </div>
+            <div class="chart-wrap">
+                <canvas id="categoryChart" width="340" height="340" aria-label="Category spend chart"></canvas>
+            </div>
+            <ul id="categoryLegend" class="legend-list"></ul>
+            <div class="deep-insights-grid">
+                <article class="insight-tile">
+                    <span>Top Category</span>
+                    <strong id="topCategoryInsight">-</strong>
+                </article>
+                <article class="insight-tile">
+                    <span>Recurring Share</span>
+                    <strong id="recurringShareInsight">0%</strong>
+                </article>
+                <article class="insight-tile">
+                    <span>Average / Active Day</span>
+                    <strong id="dailyAverageInsight">$0.00</strong>
+                </article>
+                <article class="insight-tile">
+                    <span>Projected Month End</span>
+                    <strong id="projectionInsight">$0.00</strong>
+                </article>
+            </div>
+            <div class="mini-trend-wrap">
+                <h4>Monthly Trend (Last 6 Months)</h4>
+                <canvas id="monthlyTrendChart" width="360" height="170" aria-label="Monthly spending trend"></canvas>
+            </div>
+            <div class="summary-card">
+                <h4>AI Monthly Summary</h4>
+                <ul id="monthlySummaryList" class="insight-list compact-list"></ul>
+            </div>
+        </section>
+
+        <section class="daily panel reveal reveal-delay-3">
+            <div class="panel-head">
+                <h3>Daily Focus</h3>
+            </div>
+            <div class="daily-kpis">
+                <article class="insight-tile">
+                    <span>Today Spend</span>
+                    <strong id="todaySpendInsight">$0.00</strong>
+                </article>
+                <article class="insight-tile">
+                    <span>This Week</span>
+                    <strong id="weekSpendInsight">$0.00</strong>
+                </article>
+                <article class="insight-tile">
+                    <span>No-Spend Streak</span>
+                    <strong id="streakInsight">0 days</strong>
+                </article>
+                <article class="insight-tile">
+                    <span>Largest Today</span>
+                    <strong id="largestTodayInsight">$0.00</strong>
+                </article>
+            </div>
+            <div class="routine-block">
+                <h4>Recurring Due Soon</h4>
+                <ul id="dueSoonList" class="insight-list compact-list"></ul>
+            </div>
+            <div class="routine-block">
+                <h4>Quick Reuse Templates</h4>
+                <div id="recentTemplates" class="quick-categories"></div>
+            </div>
+        </section>
+
+        <section id="historySection" class="history panel reveal reveal-delay-4">
+            <div class="panel-head panel-head-wrap">
+                <h3>Expense History</h3>
+                <div class="table-actions">
+                    <button id="undoDeleteBtn" class="btn btn-ghost" disabled>Undo Delete</button>
+                    <button id="exportBtn" class="btn btn-soft">Export CSV</button>
+                    <label class="btn btn-soft import-label">
+                        Import CSV
+                        <input id="importInput" type="file" accept=".csv" hidden>
+                    </label>
+                </div>
+            </div>
+
+            <div class="filters-grid">
+                <input id="searchInput" type="search" placeholder="Search title, note, payment...">
+                <select id="typeFilter">
+                    <option value="all">All Types</option>
+                    <option value="recurring">Recurring</option>
+                    <option value="one-time">One-time</option>
+                </select>
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                </select>
+                <input id="fromDate" type="date" aria-label="From date">
+                <input id="toDate" type="date" aria-label="To date">
+                <select id="sortBy">
+                    <option value="date-desc">Newest First</option>
+                    <option value="date-asc">Oldest First</option>
+                    <option value="amount-desc">Amount High-Low</option>
+                    <option value="amount-asc">Amount Low-High</option>
+                    <option value="title-asc">Title A-Z</option>
+                </select>
+                <button id="clearFiltersBtn" class="btn btn-ghost">Clear Filters</button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Payment</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="expenseTableBody"></tbody>
+                </table>
+                <div id="emptyState" class="empty-state">
+                    <h4>No expenses match your filters.</h4>
+                    <p>Try adjusting filters or add a new transaction.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script th:src="@{/js/app.js}" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Pulse | Complete Expense Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/app.css}" href="/css/app.css">
+</head>
+<body>
+<div class="landing-bg"></div>
+
+<div class="page-shell page-shell-landing">
+    <nav class="site-nav panel">
+        <a class="nav-brand" th:href="@{/}">
+            <span class="brand-mark">EP</span>
+            <span>Expense Pulse</span>
+        </a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#insights">Insights</a>
+            <a href="#why">Why It Works</a>
+        </div>
+        <a class="btn btn-primary" th:href="@{/dashboard}">Open Dashboard</a>
+    </nav>
+
+    <section class="landing-hero panel">
+        <div>
+            <p class="eyebrow">Complete Expense Intelligence</p>
+            <h1 class="landing-title">From quick tracking to strict budget control, built for real money discipline.</h1>
+            <p class="landing-copy">Track every expense, enforce monthly limits, uncover category leakage, and make better decisions with live insights designed for daily use.</p>
+            <div class="landing-actions">
+                <a class="btn btn-primary" th:href="@{/dashboard}">Start Managing Expenses</a>
+                <a class="btn btn-soft" href="#features">Explore Features</a>
+            </div>
+        </div>
+        <div class="landing-kpi-grid">
+            <article class="kpi kpi-highlight">
+                <span>Budget Lock</span>
+                <strong>Hard Stop</strong>
+                <p>No new expense once monthly limit is crossed.</p>
+            </article>
+            <article class="kpi">
+                <span>Category Insights</span>
+                <strong>Actionable</strong>
+                <p>Top category, recurring share, and trend visibility.</p>
+            </article>
+            <article class="kpi">
+                <span>Data Portability</span>
+                <strong>CSV I/O</strong>
+                <p>Import or export your records anytime.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="features" class="landing-section panel">
+        <h2>Feature Set That Feels Complete</h2>
+        <div class="feature-grid">
+            <article>
+                <h3>Strict Monthly Budget Rule</h3>
+                <p>Budget breaches block new transactions until you raise the monthly cap.</p>
+            </article>
+            <article>
+                <h3>Advanced Filters and Sorting</h3>
+                <p>Find entries fast using date, category, type, search, and sorting controls.</p>
+            </article>
+            <article>
+                <h3>Deeper Category Intelligence</h3>
+                <p>See dominant categories, concentration risks, and recurring cost pressure.</p>
+            </article>
+            <article>
+                <h3>Editable History</h3>
+                <p>Every entry can be edited or removed with immediate insight recalculation.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="insights" class="landing-section panel">
+        <h2>What You Can Discover Quickly</h2>
+        <ul class="insight-list">
+            <li>Which category consumes the highest monthly share.</li>
+            <li>Projected month-end spending based on current burn rate.</li>
+            <li>Recurring expense load vs one-time transactions.</li>
+            <li>Largest transaction impact and spending concentration.</li>
+        </ul>
+    </section>
+
+    <section id="why" class="landing-section panel">
+        <h2>Why This Setup Works</h2>
+        <ul class="insight-list">
+            <li>Server-side budget lock cannot be bypassed by browser hacks.</li>
+            <li>Expense history, edits, and deletes are persisted in database storage.</li>
+            <li>Insights update automatically from real records, not mock data only.</li>
+        </ul>
+    </section>
+</div>
+</body>
+</html>
