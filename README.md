@@ -56,8 +56,8 @@ The entire app runs with a single command — no Java install, no MySQL setup ne
 
 ```bash
 # Clone the repo
-git clone https://github.com/kamalhussaindevops/expense-pulse.git
-cd expense-pulse
+git clone https://github.com/kamalhussaindevops/docker-expense-pulse.git
+cd docker-expense-pulse
 
 # Start everything
 docker compose up -d
